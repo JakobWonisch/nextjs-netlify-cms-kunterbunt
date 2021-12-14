@@ -1,19 +1,17 @@
 {
   "base_url": "https://wutali-nextjs-netlify-blog.netlify.app",
-  "site_title": "Next.js Netlify Blog",
-  "site_description": "Next.js blog template for Netlify",
+  "site_title": "Montessori-Kindergruppe Kunterbunt",
+  "site_description": "Website der Montessori-Kindergruppe Kunterbunt",
   "site_keywords": [
     {
-      "keyword": "Next.js"
+      "keyword": "Kindergruppe"
     },
     {
-      "keyword": "Netlify"
+      "keyword": "Kunterbunt"
     },
     {
-      "keyword": "React"
+      "keyword": "Montessori"
     }
   ],
-  "posts_per_page": 5,
-  "twitter_account": "@my-account",
-  "github_account": "wutali"
+  "posts_per_page": 5
 }
