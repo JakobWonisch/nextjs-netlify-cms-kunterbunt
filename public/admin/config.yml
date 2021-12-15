@@ -162,3 +162,32 @@ collections:
       - label: "Body"
         name: "body"
         widget: "markdown"
+
+  - name: "galleries"
+    label: "Galleries"
+    label_singular: "Gallery"
+    folder: "content/galleries/"
+    extension: "mdx"
+    format: "frontmatter"
+    create: true
+    slug: "{{slug}}"
+    identifier_field: slug
+    summary: "{{title}}"
+    fields:
+      - label: "Slug"
+        name: "slug"
+        widget: "string"
+      - label: "Title"
+        name: "title"
+        widget: "string"
+      - label: "Description"
+        name: "description"
+        widget: "string"
+      - label: "Photos"
+        label_singular: "Photo"
+        name: "photos"
+        widget: "list"
+        fields:
+          - label: "Photo"
+            name: "photo"
+            widget: "image"
