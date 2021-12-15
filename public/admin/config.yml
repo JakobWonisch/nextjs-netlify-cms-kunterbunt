@@ -151,8 +151,11 @@ collections:
     delete: false
     slug: "{{slug}}"
     identifier_field: slug
-    summary: "{{summary}}"
+    summary: "{{title}}"
     fields:
+      - label: "Title"
+        name: "title"
+        widget: "string"
       - label: "Summary"
         name: "summary"
         widget: "string"
@@ -162,6 +165,15 @@ collections:
       - label: "Body"
         name: "body"
         widget: "markdown"
+      - label: "Galleries"
+        name: "galleries"
+        widget: "relation"
+        collection: "galleries"
+        search_fields: ['title']
+        value_field: "{{slug}}"
+        display_fields: ['title']
+        required: false
+        multiple: true
 
   - name: "galleries"
     label: "Galleries"
