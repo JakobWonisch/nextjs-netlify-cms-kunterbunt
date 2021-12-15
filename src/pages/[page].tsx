@@ -3,11 +3,11 @@ import renderToString from "next-mdx-remote/render-to-string";
 import { MdxRemote } from "next-mdx-remote/types";
 import hydrate from "next-mdx-remote/hydrate";
 import matter from "gray-matter";
-import { fetchPageContent } from "../../lib/pages";
+import { fetchPageContent } from "../lib/pages";
 import fs from "fs";
 import yaml from "js-yaml";
 import { parseISO } from 'date-fns';
-import PageLayout from "../../components/PageLayout";
+import PageLayout from "../components/PageLayout";
 
 import InstagramEmbed from "react-instagram-embed";
 import YouTube from "react-youtube";
@@ -55,7 +55,7 @@ export default function Page({
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = fetchPageContent().map(it => "/pages/" + it.slug);
+  const paths = fetchPageContent().map(it => "/" + it.slug);
   return {
     paths,
     fallback: false,
