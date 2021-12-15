@@ -13,9 +13,12 @@ import InstagramEmbed from "react-instagram-embed";
 import YouTube from "react-youtube";
 import { TwitterTweetEmbed } from "react-twitter-embed";
 
+import path from "path";
+
 export type Props = {
   slug: string;
   summary: string;
+  footerSource: MdxRemote.Source;
   source: MdxRemote.Source;
 };
 
@@ -29,13 +32,16 @@ const slugToPageContent = (pageContents => {
 export default function Page({
   slug,
   summary,
+  footerSource,
   source,
 }: Props) {
   const content = hydrate(source, { components })
+  const footerContent = hydrate(footerSource, { components })
   return (
     <PageLayout
       slug={slug}
       summary={summary}
+      footer={footerContent}
     >
       {content}
     </PageLayout>
@@ -52,15 +58,31 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const slug = params.page as string;
+
+  // render page
   const source = fs.readFileSync(slugToPageContent[slug].fullPath, "utf8");
   const { content, data } = matter(source, {
     engines: { yaml: (s) => yaml.load(s, { schema: yaml.JSON_SCHEMA }) as object }
   });
   const mdxSource = await renderToString(content, { components, scope: data });
+
+  // render footer
+  const footerPathSpots = path.join(process.cwd(), "footer/spots.yml");
+  const footerSource = fs.readFileSync(footerPathSpots, "utf8");
+  // const { footerContent, footerData } = matter(footerSource, {
+  //   engines: { yaml: (s) => yaml.load(s, { schema: yaml.JSON_SCHEMA }) as object }
+  // });
+  const footerYaml = yaml.load(footerSource, { schema: yaml.JSON_SCHEMA }) as object;
+  const mdxFooterSource = await renderToString(footerYaml.body, { components, scope: data });
+
+  // console.log(footerYaml);
+  // console.log(mdxFooterSource);
+
   return {
     props: {
       slug: data.slug,
       summary: data.summary,
+      footerSource: mdxFooterSource,
       source: mdxSource
     },
   };

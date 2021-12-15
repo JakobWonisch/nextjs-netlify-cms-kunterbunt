@@ -16,11 +16,13 @@ import { getTag } from "../lib/tags";
 type Props = {
   slug: string;
   summary: string;
+  footer: React.ReactNode;
   children: React.ReactNode;
 };
 export default function PageLayout({
   slug,
   summary,
+  footer,
   children,
 }: Props) {
   return (
@@ -38,6 +40,7 @@ export default function PageLayout({
           <div className={styles.content}>{children}</div>
         </article>
         <footer>
+          <div className={styles.content}>{footer}</div>
           <div className={"social-list"}>
             <SocialList />
           </div>
