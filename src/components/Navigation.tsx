@@ -13,18 +13,37 @@ export default function Navigation() {
         <ul>
           <li>
             <Link href="/">
-              <a className={router.pathname === "/" ? "active" : null}>about</a>
+              <a className={router.pathname === "/" ? "active" : null}>Home</a>
             </Link>
           </li>
           <li>
-            <Link href="/posts">
-              <a
-                className={
-                  router.pathname.startsWith("/posts") ? "active" : null
-                }
-              >
-                blog
-              </a>
+            <Link href="/konzept">
+              <a className={router.pathname.startsWith("/konzept") ? "active" : null}>Pädagogisches Konzept</a>
+            </Link>
+          </li>
+          <li>
+            <Link href="/grundsatz">
+              <a className={router.pathname.startsWith("/grundsatz") ? "active" : null}>Montessori-Grundsätze</a>
+            </Link>
+          </li>
+          <li>
+            <Link href="/montessori">
+              <a className={router.pathname.startsWith("/montessori") ? "active" : null}>Maria Montessori</a>
+            </Link>
+          </li>
+          <li>
+            <Link href="/ueber">
+              <a className={router.pathname.startsWith("/ueber") ? "active" : null}>Über uns</a>
+            </Link>
+          </li>
+          <li>
+            <Link href="/infos">
+              <a className={router.pathname.startsWith("/infos") ? "active" : null}>Infos für Eltern</a>
+            </Link>
+          </li>
+          <li>
+            <Link href="/fotos">
+              <a className={router.pathname.startsWith("/fotos") ? "active" : null}>Fotos</a>
             </Link>
           </li>
         </ul>
