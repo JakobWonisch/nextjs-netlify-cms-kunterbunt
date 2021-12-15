@@ -6,10 +6,8 @@ import yaml from "js-yaml";
 const pagesDirectory = path.join(process.cwd(), "content/pages");
 
 export type PageContent = {
-  readonly date: string;
-  readonly title: string;
   readonly slug: string;
-  readonly tags?: string[];
+  readonly summary: string;
   readonly fullPath: string;
 };
 
@@ -35,10 +33,8 @@ export function fetchPageContent(): PageContent[] {
         },
       });
       const matterData = matterResult.data as {
-        date: string;
-        title: string;
-        tags: string[];
         slug: string;
+        summary: string;
         fullPath: string,
       };
       matterData.fullPath = fullPath;

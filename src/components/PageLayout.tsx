@@ -14,72 +14,28 @@ import { getAuthor } from "../lib/authors";
 import { getTag } from "../lib/tags";
 
 type Props = {
-  title: string;
-  date: Date;
   slug: string;
-  tags: string[];
-  author: string;
-  description?: string;
+  summary: string;
   children: React.ReactNode;
 };
 export default function PageLayout({
-  title,
-  date,
   slug,
-  author,
-  tags,
-  description = "",
+  summary,
   children,
 }: Props) {
-  const keywords = tags.map(it => getTag(it).name);
-  const authorName = getAuthor(author).name;
   return (
     <Layout>
       <BasicMeta
-        url={`/pages/${slug}`}
-        title={title}
-        keywords={keywords}
-        description={description}
+        url={`/${slug}`}
+        title={slug}
       />
       <TwitterCardMeta
-        url={`/pages/${slug}`}
-        title={title}
-        description={description}
-      />
-      <OpenGraphMeta
-        url={`/pages/${slug}`}
-        title={title}
-        description={description}
-      />
-      <JsonLdMeta
-        url={`/pages/${slug}`}
-        title={title}
-        keywords={keywords}
-        date={date}
-        author={authorName}
-        description={description}
+        url={`/${slug}`}
+        title={slug}
       />
       <div className={"container"}>
         <article>
-          <header>
-            <h1>{title}</h1>
-            <div className={"metadata"}>
-              <div>
-                <Date date={date} />
-              </div>
-              <div>
-                <Author author={getAuthor(author)} />
-              </div>
-            </div>
-          </header>
           <div className={styles.content}>{children}</div>
-          <ul className={"tag-list"}>
-            {tags.map((it, i) => (
-              <li key={i}>
-                <TagButton tag={getTag(it)} />
-              </li>
-            ))}
-          </ul>
         </article>
         <footer>
           <div className={"social-list"}>
