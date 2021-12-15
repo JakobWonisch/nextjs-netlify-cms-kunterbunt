@@ -1,3 +1,11 @@
+.spots {
+  margin-top: 5rem;
+}
+
+.spots strong {
+  font-weight: bold;
+}
+
 .content {
   font-family: "Ubuntu", sans-serif;
   color: #222;

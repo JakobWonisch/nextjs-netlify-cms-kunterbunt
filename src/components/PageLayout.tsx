@@ -23,6 +23,7 @@ export default function PageLayout({
   slug,
   summary,
   footer,
+  footerAddress,
   children,
 }: Props) {
   return (
@@ -40,7 +41,8 @@ export default function PageLayout({
           <div className={styles.content}>{children}</div>
         </article>
         <footer>
-          <div className={styles.content}>{footer}</div>
+          <div className={styles.spots}>{footer}</div>
+          <div className={styles.address}>{footerAddress}</div>
           <div className={"social-list"}>
             <SocialList />
           </div>

@@ -19,6 +19,7 @@ export type Props = {
   slug: string;
   summary: string;
   footerSource: MdxRemote.Source;
+  footerSourceAddress: MdxRemote.Source;
   source: MdxRemote.Source;
 };
 
@@ -33,15 +34,18 @@ export default function Page({
   slug,
   summary,
   footerSource,
+  footerSourceAddress,
   source,
 }: Props) {
   const content = hydrate(source, { components })
   const footerContent = hydrate(footerSource, { components })
+  const footerContentAddress = hydrate(footerSourceAddress, { components })
   return (
     <PageLayout
       slug={slug}
       summary={summary}
       footer={footerContent}
+      footerAddress={footerContentAddress}
     >
       {content}
     </PageLayout>
@@ -69,11 +73,13 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   // render footer
   const footerPathSpots = path.join(process.cwd(), "footer/spots.yml");
   const footerSource = fs.readFileSync(footerPathSpots, "utf8");
-  // const { footerContent, footerData } = matter(footerSource, {
-  //   engines: { yaml: (s) => yaml.load(s, { schema: yaml.JSON_SCHEMA }) as object }
-  // });
   const footerYaml = yaml.load(footerSource, { schema: yaml.JSON_SCHEMA }) as object;
   const mdxFooterSource = await renderToString(footerYaml.body, { components, scope: data });
+
+  const footerPathAddress = path.join(process.cwd(), "footer/address.yml");
+  const footerSourceAddress = fs.readFileSync(footerPathAddress, "utf8");
+  const footerYamlAddress = yaml.load(footerSourceAddress, { schema: yaml.JSON_SCHEMA }) as object;
+  const mdxFooterAddressSource = await renderToString(footerYamlAddress.body, { components, scope: data });
 
   // console.log(footerYaml);
   // console.log(mdxFooterSource);
@@ -83,6 +89,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       slug: data.slug,
       summary: data.summary,
       footerSource: mdxFooterSource,
+      footerSourceAddress: mdxFooterAddressSource,
       source: mdxSource
     },
   };
