@@ -203,3 +203,30 @@ collections:
           - label: "Photo"
             name: "photo"
             widget: "image"
+
+  - name: "footer"
+    label: "Footer"
+    delete: false
+    files:
+      - name: "spots"
+        label: "Spots"
+        file: "footer/spots.yml"
+        description: "Current spots"
+        fields:
+          - label: "Date"
+            name: "date"
+            widget: "datetime"
+            format: "DD/MM/YYYY"
+            dateFormat: "DD/MM/YYYY"
+            timeFormat: false
+          - label: "Body"
+            name: "body"
+            widget: "markdown"
+      - name: "address"
+        label: "Address"
+        file: "footer/address.yml"
+        description: "Address data"
+        fields:
+          - label: "Body"
+            name: "body"
+            widget: "markdown"
