@@ -74,12 +74,12 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const footerPathSpots = path.join(process.cwd(), "footer/spots.yml");
   const footerSource = fs.readFileSync(footerPathSpots, "utf8");
   const footerYaml = yaml.load(footerSource, { schema: yaml.JSON_SCHEMA }) as object;
-  const mdxFooterSource = await renderToString(footerYaml.body, { components, scope: data });
+  const mdxFooterSource = await renderToString(footerYaml["body"], { components, scope: data });
 
   const footerPathAddress = path.join(process.cwd(), "footer/address.yml");
   const footerSourceAddress = fs.readFileSync(footerPathAddress, "utf8");
   const footerYamlAddress = yaml.load(footerSourceAddress, { schema: yaml.JSON_SCHEMA }) as object;
-  const mdxFooterAddressSource = await renderToString(footerYamlAddress.body, { components, scope: data });
+  const mdxFooterAddressSource = await renderToString(footerYamlAddress["body"], { components, scope: data });
 
   // console.log(footerYaml);
   // console.log(mdxFooterSource);

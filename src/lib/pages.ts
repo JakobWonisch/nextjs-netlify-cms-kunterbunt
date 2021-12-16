@@ -50,21 +50,12 @@ export function fetchPageContent(): PageContent[] {
 
       return matterData;
     });
-  // Sort pages by date
-  pageCache = allPagesData.sort((a, b) => {
-    if (a.date < b.date) {
-      return 1;
-    } else {
-      return -1;
-    }
-  });
-  return pageCache;
+
+  return allPagesData;
 }
 
 export function countPages(tag?: string): number {
-  return fetchPageContent().filter(
-    (it) => !tag || (it.tags && it.tags.includes(tag))
-  ).length;
+  return fetchPageContent().length;
 }
 
 export function listPageContent(
@@ -72,7 +63,5 @@ export function listPageContent(
   limit: number,
   tag?: string
 ): PageContent[] {
-  return fetchPageContent()
-    .filter((it) => !tag || (it.tags && it.tags.includes(tag)))
-    .slice((page - 1) * limit, page * limit);
+  return fetchPageContent().slice((page - 1) * limit, page * limit);
 }

@@ -17,6 +17,7 @@ type Props = {
   slug: string;
   summary: string;
   footer: React.ReactNode;
+  footerAddress: React.ReactNode;
   children: React.ReactNode;
 };
 export default function PageLayout({
