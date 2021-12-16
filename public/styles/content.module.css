@@ -1,5 +1,10 @@
 .spots {
   margin-top: 5rem;
+  background-image: url("/images/watercolor.jpg");
+  background-color: yellow;
+  background-blend-mode: multiply;
+  padding: 1rem;
+  border-radius: 1rem;
 }
 
 .spots strong {
