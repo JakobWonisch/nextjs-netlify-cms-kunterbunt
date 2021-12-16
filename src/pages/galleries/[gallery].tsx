@@ -54,6 +54,7 @@ export default function GalleryPage({
   const content = hydrate(source, { components })
   const footerContent = hydrate(footerSource, { components })
   const footerContentAddress = hydrate(footerSourceAddress, { components })
+  const numPerRow = {xs: 1,s: 2,m: 3,l: 3,xl: 3, xxl:3};
   return (
     <PageLayout
       slug={slug}
@@ -63,7 +64,7 @@ export default function GalleryPage({
     >
       <h1>{title}</h1>
       {content}
-      <DynamicComponentWithNoSSR images={photos} />
+      <DynamicComponentWithNoSSR images={photos} useLightBox={true} numOfImagesPerRow={numPerRow}/>
     </PageLayout>
   )
 }
@@ -102,7 +103,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   const photoset = data.photos.map(it => { return { src: it.photo }});
 
-console.log(photoset);
+// console.log(photoset);
   return {
     props: {
       title: data.title,
