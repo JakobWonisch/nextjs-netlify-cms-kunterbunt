@@ -14,13 +14,14 @@ import YouTube from "react-youtube";
 import { TwitterTweetEmbed } from "react-twitter-embed";
 
 import path from "path";
+import { GalleryContent } from "../lib/galleries";
 
 const galleriesDirectory = path.join(process.cwd(), "content/galleries");
 
 export type Props = {
   slug: string;
   summary: string;
-  galleries: object[];
+  galleries: GalleryContent[];
   footerSource: MdxRemote.Source;
   footerSourceAddress: MdxRemote.Source;
   source: MdxRemote.Source;

@@ -13,11 +13,12 @@ import TagButton from "./TagButton";
 import { getAuthor } from "../lib/authors";
 import { getTag } from "../lib/tags";
 import GalleryItem from "./GalleryItem";
+import { GalleryContent } from "../lib/galleries";
 
 type Props = {
   slug: string;
   summary: string;
-  galleries: object[];
+  galleries?: GalleryContent[];
   footer: React.ReactNode;
   footerAddress: React.ReactNode;
   children: React.ReactNode;
@@ -30,6 +31,7 @@ export default function PageLayout({
   footerAddress,
   children,
 }: Props) {
+  console.log(galleries);
   return (
     <Layout>
       <BasicMeta

@@ -57,7 +57,7 @@ export function fetchGalleryContent(): GalleryContent[] {
 }
 
 export function countGalleries(tag?: string): number {
-  return fetchPageContent().length;
+  return fetchGalleryContent().length;
 }
 
 export function listGalleryContent(

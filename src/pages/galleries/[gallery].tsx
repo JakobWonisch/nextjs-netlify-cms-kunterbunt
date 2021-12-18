@@ -20,11 +20,14 @@ import { render } from 'react-dom';
 import path from "path";
 import dynamic from 'next/dynamic'
 
+export type ImageProps = {
+  src: string
+};
 export type Props = {
   title: string;
   slug: string;
   description: string;
-  photos: object[];
+  photos: ImageProps[];
   footerSource: MdxRemote.Source;
   footerSourceAddress: MdxRemote.Source;
   source: MdxRemote.Source;
@@ -36,6 +39,7 @@ const slugToGalleryContent = (galleryContents => {
   galleryContents.forEach(it => hash[it.slug] = it)
   return hash;
 })(fetchGalleryContent());
+
 
 const DynamicComponentWithNoSSR = dynamic(
   () => import('react-responsive-gallery'),
