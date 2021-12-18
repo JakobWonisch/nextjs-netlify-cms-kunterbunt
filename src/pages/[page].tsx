@@ -59,8 +59,6 @@ export default function Page({
     prints.push(<img src={name} style={style}></img>);
   }
 
-  console.log(prints);
-
   return (
     <PageLayout
       slug={slug}
