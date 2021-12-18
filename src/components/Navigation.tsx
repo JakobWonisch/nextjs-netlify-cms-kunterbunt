@@ -62,7 +62,7 @@ export default function Navigation() {
               padding: 0;
               position: fixed;
               top: 0;
-              background-color: #fff;
+              background-color: rgba(255,255,255,0.5);
               display: flex;
               flex-direction: column;
               justify-content: center;
@@ -73,6 +73,7 @@ export default function Navigation() {
             .active ul {
               opacity: 1;
               transform: translateY(0);
+              background-color: rgba(255,255,255,1)
             }
             li {
               margin-bottom: 1.75rem;

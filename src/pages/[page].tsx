@@ -44,6 +44,23 @@ export default function Page({
   const content = hydrate(source, { components })
   const footerContent = hydrate(footerSource, { components })
   const footerContentAddress = hydrate(footerSourceAddress, { components })
+
+  // generate prints
+  let prints = [];
+  const printMin = 1, printMax = 8,
+    step = 200;
+
+  for(let i = 0; i < 10; i++) {
+    let name = "/images/handprint_" + ((Math.floor(Math.random() * (printMax - printMin)) + printMin) + "").padStart(2, "0") + ".JPEG",
+      style ={
+        top: (step * i) + "px",
+        transform: "rotate(" + (Math.random() * 6.28) + "rad)"
+      };
+    prints.push(<img src={name} style={style}></img>);
+  }
+
+  console.log(prints);
+
   return (
     <PageLayout
       slug={slug}
@@ -52,7 +69,10 @@ export default function Page({
       footer={footerContent}
       footerAddress={footerContentAddress}
     >
-      {content}
+      <div id="print-bg">
+        {prints}
+      </div>
+        {content}
     </PageLayout>
   )
 }
@@ -76,7 +96,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const mdxSource = await renderToString(content, { components, scope: data });
 
   // load galleries
-  data.galleries = data.galleries.map(it => {
+  data.galleries = data.galleries ? data.galleries.map(it => {
         const fullPath = path.join(galleriesDirectory, it + ".mdx");
         const fileContents = fs.readFileSync(fullPath, "utf8");
 
@@ -101,7 +121,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
         }
 
         return matterData;
-  });
+  }) : [];
 
   // render footer
   const footerPathSpots = path.join(process.cwd(), "footer/spots.yml");

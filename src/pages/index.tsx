@@ -41,7 +41,7 @@ export default function Index({
       <BasicMeta url={"/"} />
       <OpenGraphMeta url={"/"} />
       <TwitterCardMeta url={"/"} />
-
+      <img id="logo" src="/images/logo.jpg"></img>
       {content}
 
       <style jsx>{`

@@ -41,3 +41,27 @@ a:hover {
   top: 0;
   left: 0;
 }
+
+#logo {
+  width: 75%;
+  max-width: 20rem;
+  height: auto;
+  margin: auto;
+  display: block;
+}
+
+#print-bg {
+  position: relative;
+  z-index: -1;
+}
+
+#print-bg img {
+  position: absolute;
+  width: 20rem;
+  right: 100%;
+}
+
+#print-bg img:nth-child(even) {
+  right: auto;
+  left: 100%;
+}
