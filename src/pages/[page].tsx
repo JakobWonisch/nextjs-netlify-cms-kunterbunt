@@ -15,9 +15,12 @@ import { TwitterTweetEmbed } from "react-twitter-embed";
 
 import path from "path";
 
+const galleriesDirectory = path.join(process.cwd(), "content/galleries");
+
 export type Props = {
   slug: string;
   summary: string;
+  galleries: object[];
   footerSource: MdxRemote.Source;
   footerSourceAddress: MdxRemote.Source;
   source: MdxRemote.Source;
@@ -33,6 +36,7 @@ const slugToPageContent = (pageContents => {
 export default function Page({
   slug,
   summary,
+  galleries,
   footerSource,
   footerSourceAddress,
   source,
@@ -44,6 +48,7 @@ export default function Page({
     <PageLayout
       slug={slug}
       summary={summary}
+      galleries={galleries}
       footer={footerContent}
       footerAddress={footerContentAddress}
     >
@@ -70,6 +75,34 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   });
   const mdxSource = await renderToString(content, { components, scope: data });
 
+  // load galleries
+  data.galleries = data.galleries.map(it => {
+        const fullPath = path.join(galleriesDirectory, it + ".mdx");
+        const fileContents = fs.readFileSync(fullPath, "utf8");
+
+        // Use gray-matter to parse the page metadata section
+        const matterResult = matter(fileContents, {
+          engines: {
+            yaml: (s) => yaml.load(s, { schema: yaml.JSON_SCHEMA }) as object,
+          },
+        });
+        const matterData = matterResult.data as {
+          slug: string;
+          summary: string;
+          fullPath: string,
+        };
+        matterData.fullPath = fullPath;
+
+        // Validate slug string
+        if (matterData.slug !== it) {
+          throw new Error(
+            "slug field not match with the path of its content source"
+          );
+        }
+
+        return matterData;
+  });
+
   // render footer
   const footerPathSpots = path.join(process.cwd(), "footer/spots.yml");
   const footerSource = fs.readFileSync(footerPathSpots, "utf8");
@@ -88,6 +121,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     props: {
       slug: data.slug,
       summary: data.summary,
+      galleries: data.galleries,
       footerSource: mdxFooterSource,
       footerSourceAddress: mdxFooterAddressSource,
       source: mdxSource

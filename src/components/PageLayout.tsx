@@ -12,10 +12,12 @@ import { SocialList } from "./SocialList";
 import TagButton from "./TagButton";
 import { getAuthor } from "../lib/authors";
 import { getTag } from "../lib/tags";
+import GalleryItem from "./GalleryItem";
 
 type Props = {
   slug: string;
   summary: string;
+  galleries: object[];
   footer: React.ReactNode;
   footerAddress: React.ReactNode;
   children: React.ReactNode;
@@ -23,6 +25,7 @@ type Props = {
 export default function PageLayout({
   slug,
   summary,
+  galleries,
   footer,
   footerAddress,
   children,
@@ -41,6 +44,14 @@ export default function PageLayout({
         <article>
           <div className={styles.content}>{children}</div>
         </article>
+        { (galleries && galleries.length != 0) ?
+        (<ul className={"gallery-list"}>
+          {galleries.map((it, i) => (
+            <li key={i}>
+              <GalleryItem gallery={it} />
+            </li>
+          ))}
+        </ul>) : "" }
         <footer>
           <div className={styles.spots}>{footer}</div>
           <div className={styles.address}>{footerAddress}</div>
