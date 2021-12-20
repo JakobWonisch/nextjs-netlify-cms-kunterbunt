@@ -58,7 +58,7 @@ export default function Index({
       <OpenGraphMeta url={"/"} />
       <TwitterCardMeta url={"/"} />
       <div id="print-bg">
-        <div class="overlay"></div>
+        <div className="overlay"></div>
         {prints}
       </div>
       <img id="logo" src="/images/logo.jpg"></img>

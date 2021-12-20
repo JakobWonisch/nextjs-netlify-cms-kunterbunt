@@ -70,7 +70,7 @@ export default function Page({
       footerAddress={footerContentAddress}
     >
       <div id="print-bg">
-        <div class="overlay"></div>
+        <div className="overlay"></div>
         {prints}
       </div>
         {content}
