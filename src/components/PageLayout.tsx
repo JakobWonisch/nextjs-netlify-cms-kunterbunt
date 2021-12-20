@@ -76,7 +76,7 @@ export default function PageLayout({
             }
             article {
               position: relative;
-              flex: 1 0 auto;
+              flex: 0 0 auto;
             }
             h1 {
               margin: 0 0 0.5rem;
