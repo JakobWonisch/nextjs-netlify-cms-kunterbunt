@@ -8,7 +8,6 @@ import BasicMeta from "./meta/BasicMeta";
 import JsonLdMeta from "./meta/JsonLdMeta";
 import OpenGraphMeta from "./meta/OpenGraphMeta";
 import TwitterCardMeta from "./meta/TwitterCardMeta";
-import { SocialList } from "./SocialList";
 import TagButton from "./TagButton";
 import { getAuthor } from "../lib/authors";
 import { getTag } from "../lib/tags";
@@ -57,9 +56,6 @@ export default function PageLayout({
         <footer>
           <div className={styles.spots}>{footer}</div>
           <div className={styles.address}>{footerAddress}</div>
-          <div className={"social-list"}>
-            <SocialList />
-          </div>
           <Copyright />
         </footer>
       </div>
@@ -79,6 +75,7 @@ export default function PageLayout({
               margin-right: 0.5rem;
             }
             article {
+              position: relative;
               flex: 1 0 auto;
             }
             h1 {

@@ -51,17 +51,24 @@ a:hover {
 }
 
 #print-bg {
-  position: relative;
+  position: absolute;
   z-index: -1;
+  width: calc(100% + 40rem);
+  max-width: 100vw;
+  height: 100%;
+  min-height: calc(100vh - 4rem);
+  left: -20rem;
+  overflow: hidden;
+  top: 0;
 }
 
 #print-bg img {
   position: absolute;
-  width: 20rem;
-  right: 100%;
+  width: 14rem;
+  left: 0;
 }
 
 #print-bg img:nth-child(even) {
-  right: auto;
-  left: 100%;
+  left: auto;
+  right: 0;
 }
