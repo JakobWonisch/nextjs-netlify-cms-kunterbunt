@@ -99,6 +99,8 @@ export default function Navigation() {
                 display: block;
                 transform: translateY(0);
                 padding: 1rem 1rem 1rem 2rem;
+                border-radius: 1rem;
+                height: auto;
               }
               li {
                 font-size: 1rem;
