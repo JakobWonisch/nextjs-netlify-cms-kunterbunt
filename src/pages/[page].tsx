@@ -49,13 +49,13 @@ export default function Page({
   // generate prints
   let prints = [];
   const printMin = 1, printMax = 8,
-    stepMin = 200, stepMax = 300;
+    stepMin = 17, stepMax = 22;
 
   for(let i = 0; i < 10; i++) {
     let name = "/images/handprint_" + ((Math.floor(Math.random() * (printMax - printMin)) + printMin) + "").padStart(2, "0") + ".JPEG",
       step = Math.random() * (stepMin - stepMin) + stepMin,
       style ={
-        top: (step + stepMin * (i - 1)) + "px",
+        top: (step + stepMin * (i - 1)) + "em",
         transform: "rotate(" + (Math.random() * 6.28) + "rad)",
       };
     prints.push(<img src={name} style={style}></img>);

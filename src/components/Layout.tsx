@@ -10,9 +10,17 @@ export default function Layout({ children }: Props) {
       <Head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="manifest" href="/site.webmanifest" />
-        <link rel="apple-touch-icon" href="/icon.png" />
-        <meta name="theme-color" content="#fff" />
+
+        <link rel="apple-touch-icon" sizes="152x152" href="/favicon/apple-touch-icon.png?v=1"/>
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png?v=1"/>
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png?v=1"/>
+        <link rel="manifest" href="/favicon/site.webmanifest?v=1"/>
+        <link rel="shortcut icon" href="/favicon/favicon.ico?v=1"/>
+        <meta name="msapplication-TileColor" content="#ffffff"/>
+        <meta name="msapplication-config" content="/favicon/browserconfig.xml?v=1"/>
+        <meta name="theme-color" content="#ffffff"/>
+
+
         <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
       </Head>
       <nav>
