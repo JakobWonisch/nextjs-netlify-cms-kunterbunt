@@ -16,6 +16,7 @@ import { GalleryContent } from "../lib/galleries";
 
 type Props = {
   slug: string;
+  title?: string;
   summary: string;
   galleries?: GalleryContent[];
   footer: React.ReactNode;
@@ -24,6 +25,7 @@ type Props = {
 };
 export default function PageLayout({
   slug,
+  title,
   summary,
   galleries,
   footer,
@@ -35,11 +37,11 @@ export default function PageLayout({
     <Layout>
       <BasicMeta
         url={`/${slug}`}
-        title={slug}
+        title={title}
       />
       <TwitterCardMeta
         url={`/${slug}`}
-        title={slug}
+        title={title}
       />
       <div className={"container"}>
         <article>

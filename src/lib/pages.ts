@@ -7,6 +7,7 @@ const pagesDirectory = path.join(process.cwd(), "content/pages");
 
 export type PageContent = {
   readonly slug: string;
+  readonly title: string;
   readonly summary: string;
   readonly fullPath: string;
 };
@@ -34,9 +35,11 @@ export function fetchPageContent(): PageContent[] {
       });
       const matterData = matterResult.data as {
         slug: string;
+        title: string;
         summary: string;
         fullPath: string,
       };
+      
       matterData.fullPath = fullPath;
 
       const slug = fileName.replace(/\.mdx$/, "");

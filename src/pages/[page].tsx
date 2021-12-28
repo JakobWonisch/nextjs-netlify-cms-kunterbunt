@@ -20,6 +20,7 @@ const galleriesDirectory = path.join(process.cwd(), "content/galleries");
 
 export type Props = {
   slug: string;
+  title: string;
   summary: string;
   galleries: GalleryContent[];
   footerSource: MdxRemote.Source;
@@ -36,6 +37,7 @@ const slugToPageContent = (pageContents => {
 
 export default function Page({
   slug,
+  title,
   summary,
   galleries,
   footerSource,
@@ -51,7 +53,7 @@ export default function Page({
   const printMin = 1, printMax = 8,
     stepMin = 17, stepMax = 22;
 
-  for(let i = 0; i < 10; i++) {
+  for(let i = 0; i < 40; i++) {
     let name = "/images/handprint_" + ((Math.floor(Math.random() * (printMax - printMin)) + printMin) + "").padStart(2, "0") + ".JPEG",
       step = Math.random() * (stepMin - stepMin) + stepMin,
       style ={
@@ -64,6 +66,7 @@ export default function Page({
   return (
     <PageLayout
       slug={slug}
+      title={title}
       summary={summary}
       galleries={galleries}
       footer={footerContent}
@@ -109,6 +112,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
         });
         const matterData = matterResult.data as {
           slug: string;
+          title: string;
           summary: string;
           fullPath: string,
         };
@@ -141,6 +145,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   return {
     props: {
       slug: data.slug,
+      title: data.title,
       summary: data.summary,
       galleries: data.galleries,
       footerSource: mdxFooterSource,
