@@ -164,6 +164,7 @@ collections:
         widget: "string"
       - label: "Body"
         name: "body"
+        required: false
         widget: "markdown"
       - label: "Galleries"
         name: "galleries"
@@ -195,6 +196,9 @@ collections:
       - label: "Description"
         name: "description"
         widget: "string"
+      - label: "Title Picture"
+        name: "thumbnail"
+        widget: "image"
       - label: "Photos"
         label_singular: "Photo"
         name: "photos"

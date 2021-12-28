@@ -8,6 +8,7 @@ const galleriesDirectory = path.join(process.cwd(), "content/galleries");
 export type GalleryContent = {
   readonly slug: string;
   readonly title: string;
+  readonly thumbnail: string;
   readonly description: string;
   readonly fullPath: string;
 };

@@ -69,6 +69,13 @@ export default function GalleryPage({
       <h1>{title}</h1>
       {content}
       <DynamicComponentWithNoSSR images={photos} useLightBox={true} numOfImagesPerRow={numPerRow}/>
+      <style jsx>
+        {`
+            h1 {
+              margin-bottom: 3rem;
+            }
+          `}
+      </style>
     </PageLayout>
   )
 }

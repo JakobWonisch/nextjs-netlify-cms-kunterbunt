@@ -110,9 +110,11 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
             yaml: (s) => yaml.load(s, { schema: yaml.JSON_SCHEMA }) as object,
           },
         });
+        console.log(matterResult.data);
         const matterData = matterResult.data as {
           slug: string;
           title: string;
+          thumbnail: string;
           summary: string;
           fullPath: string,
         };

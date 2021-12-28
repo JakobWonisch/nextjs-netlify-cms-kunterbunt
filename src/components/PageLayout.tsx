@@ -48,13 +48,11 @@ export default function PageLayout({
           <div className={styles.content}>{children}</div>
         </article>
         { (galleries && galleries.length != 0) ?
-        (<ul className={"gallery-list"}>
+        (<div className={"gallery-list"}>
           {galleries.map((it, i) => (
-            <li key={i}>
-              <GalleryItem gallery={it} />
-            </li>
+            <GalleryItem gallery={it} />
           ))}
-        </ul>) : "" }
+        </div>) : "" }
         <footer>
           <div className={styles.spots}>{footer}</div>
           <div className={styles.address}>{footerAddress}</div>
@@ -99,10 +97,23 @@ export default function PageLayout({
               text-align: center;
             }
 
+            .gallery-list {
+              display: flex;
+              flex-direction: column;
+              margin-top: 3rem;
+            }
+
             @media (min-width: 769px) {
               .container {
                 display: flex;
                 flex-direction: column;
+              }
+
+              .gallery-list {
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: space-between;
               }
             }
           `}
