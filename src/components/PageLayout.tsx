@@ -32,7 +32,6 @@ export default function PageLayout({
   footerAddress,
   children,
 }: Props) {
-  console.log(galleries);
   return (
     <Layout>
       <BasicMeta

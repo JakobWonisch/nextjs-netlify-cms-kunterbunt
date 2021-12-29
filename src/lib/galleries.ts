@@ -37,6 +37,7 @@ export function fetchGalleryContent(): GalleryContent[] {
       const matterData = matterResult.data as {
         slug: string;
         title: string;
+        thumbnail: string;
         description: string;
         fullPath: string,
       };

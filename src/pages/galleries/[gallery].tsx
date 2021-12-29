@@ -112,7 +112,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   // console.log(footerYaml);
   // console.log(mdxFooterSource);
 
-  const photoset = data.photos.map(it => { return { src: it.photo }});
+  const photoset = data.photos ? data.photos.map(it => { return { src: it.photo }}) : [];
 
 // console.log(photoset);
   return {
