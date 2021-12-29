@@ -24,7 +24,7 @@ export default function EmployeeItem({ employee }: Props) {
               position: relative;
               height: 7rem;
               margin: 1rem;
-              width: 100%;
+              width: calc(100% - 2rem);
               border-radius: 1rem;
               overflow: hidden;
               background-image: url("/images/watercolor.jpg");

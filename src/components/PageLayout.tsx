@@ -54,7 +54,7 @@ export default function PageLayout({
         { (employees && employees.length != 0) ?
         (<div className={"employee-list"}>
           {employees.map((it, i) => (
-            <EmployeeItem employee={it} />
+            <EmployeeItem employee={it} key={i}/>
           ))}
         </div>) : "" }
         <footer>

@@ -67,6 +67,12 @@ a:hover {
   transform: translateX(-50%);
   font-size: 1rem;
   pointer-events: none;
+  /* opacity: 0; */
+  transition: opacity 1s;
+}
+
+#print-bg.show {
+  opacity: 1;
 }
 
 @keyframes fadein {
@@ -78,8 +84,8 @@ a:hover {
   position: absolute;
   width: 14rem;
   left: 0;
-  /* opacity: 0;
-  animation-name: fadein;
+  /* opacity: 0; */
+  /* animation-name: fadein;
   animation-delay: 1s;
   animation-duration: 0.2s;
   animation-fill-mode: forwards; */

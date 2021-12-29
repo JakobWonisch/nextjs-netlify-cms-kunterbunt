@@ -18,6 +18,7 @@ import { GalleryContent } from "../lib/galleries";
 import { EmployeeContent } from "../lib/employees";
 
 import { useRouter } from "next/router";
+import { useState } from "react";
 
 const galleriesDirectory = path.join(process.cwd(), "content/galleries");
 const employeeDirectory = path.join(process.cwd(), "content/employees");
@@ -51,6 +52,8 @@ export default function Page({
   source,
 }: Props) {
   const router = useRouter();
+  const [oldSlug, setOldSlug] = useState("none");
+  const [printsSaved, setPrintsSaved] = useState(undefined);
   const content = hydrate(source, { components })
   const footerContent = hydrate(footerSource, { components })
   const footerContentAddress = hydrate(footerSourceAddress, { components })
@@ -60,15 +63,36 @@ export default function Page({
   const printMin = 1, printMax = 8,
     stepMin = 17, stepMax = 22;
 
-  for(let i = 0; i < 40; i++) {
-    let name = "/images/handprint_" + ((Math.floor(Math.random() * (printMax - printMin)) + printMin) + "").padStart(2, "0") + ".JPEG",
+  if(!printsSaved || slug != oldSlug) {
+    let newPrints = [];
+    for(let i = 0; i < 40; i++) {
+      let name = "/images/handprint_" + ((Math.floor(Math.random() * (printMax - printMin)) + printMin) + "").padStart(2, "0") + ".JPEG",
       step = Math.random() * (stepMin - stepMin) + stepMin,
       style ={
         top: (step + stepMin * (i - 1)) + "em",
         transform: "rotate(" + (Math.random() * 6.28) + "rad)",
       };
-    prints.push(<img src={name} style={style}></img>);
+      newPrints.push(<img src={name} style={style} key={i}></img>);
+    }
+
+    setPrintsSaved(newPrints);
   }
+
+  prints = printsSaved;
+
+  if(slug != oldSlug) {
+    // console.log("old slug: " + oldSlug);
+    setOldSlug(slug);
+  }
+
+
+  // console.log("generating prints " + slug);
+  // if(!show) {
+    // useEffect(() => {
+    //   console.log("showing");
+    //   setShow(true);
+    // });
+  // }
 
   // if on about, generate employees
   if(!router.asPath.startsWith("/ueber")) {

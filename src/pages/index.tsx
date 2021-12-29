@@ -10,6 +10,7 @@ import matter from "gray-matter";
 import fs from "fs";
 import yaml from "js-yaml";
 import path from "path";
+import { useState } from "react";
 
 export type Props = {
   footerSource: MdxRemote.Source;
@@ -23,6 +24,7 @@ export default function Index({
   source
 }: Props) {
   const content = hydrate(source, {})
+  const [printsSaved, setPrintsSaved] = useState(undefined);
   const footerContent = hydrate(footerSource, {})
   const footerContentAddress = hydrate(footerSourceAddress, {})
 
@@ -31,15 +33,22 @@ export default function Index({
   const printMin = 1, printMax = 8,
     stepMin = 17, stepMax = 22;
 
-  for(let i = 0; i < 10; i++) {
-    let name = "/images/handprint_" + ((Math.floor(Math.random() * (printMax - printMin)) + printMin) + "").padStart(2, "0") + ".JPEG",
+  if(!printsSaved) {
+    let newPrints = [];
+    for(let i = 0; i < 40; i++) {
+      let name = "/images/handprint_" + ((Math.floor(Math.random() * (printMax - printMin)) + printMin) + "").padStart(2, "0") + ".JPEG",
       step = Math.random() * (stepMin - stepMin) + stepMin,
       style ={
         top: (step + stepMin * (i - 1)) + "em",
         transform: "rotate(" + (Math.random() * 6.28) + "rad)",
       };
-    prints.push(<img src={name} style={style}></img>);
+      newPrints.push(<img src={name} style={style} key={i}></img>);
+    }
+
+    setPrintsSaved(newPrints);
   }
+
+  prints = printsSaved;
 
   return (
     <PageLayout
