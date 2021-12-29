@@ -1,7 +1,7 @@
 backend:
-  name: git-gateway
-  # name: proxy
-  # proxy_url: http://localhost:8081/api/v1
+  # name: git-gateway
+  name: proxy
+  proxy_url: http://localhost:8081/api/v1
   branch: master
 media_folder: public/images
 public_folder: /images
@@ -89,6 +89,23 @@ collections:
                 name: "name"
                 widget: "string"
                 hint: "Tag name for displaying on the site"
+      - name: "employee-order"
+        label: "Employee Order"
+        file: "meta/employee-order.yml"
+        description: "Order of employees on about page"
+        fields:
+          - name: employees
+            label: "Employees"
+            label_singular: "Employee"
+            widget: list
+            fields:
+              - label: "Employee"
+                name: "employee"
+                widget: "relation"
+                collection: "employees"
+                search_fields: ['name']
+                value_field: "{{slug}}"
+                display_fields: ['name']
 
   - name: "posts"
     label: "Posts"
