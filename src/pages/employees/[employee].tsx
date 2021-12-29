@@ -3,43 +3,54 @@ import renderToString from "next-mdx-remote/render-to-string";
 import { MdxRemote } from "next-mdx-remote/types";
 import hydrate from "next-mdx-remote/hydrate";
 import matter from "gray-matter";
-import { fetchPageContent } from "../lib/pages";
+import { fetchGalleryContent } from "../../lib/galleries";
 import fs from "fs";
 import yaml from "js-yaml";
 import { parseISO } from 'date-fns';
-import PageLayout from "../components/PageLayout";
+import PageLayout from "../../components/PageLayout";
 
 import InstagramEmbed from "react-instagram-embed";
 import YouTube from "react-youtube";
 import { TwitterTweetEmbed } from "react-twitter-embed";
 
+import React from 'react';
+import { render } from 'react-dom';
+// import ResponsiveGallery from 'react-responsive-gallery';
+
 import path from "path";
-import { GalleryContent } from "../lib/galleries";
+import dynamic from 'next/dynamic'
 
-const galleriesDirectory = path.join(process.cwd(), "content/galleries");
-
+export type ImageProps = {
+  src: string
+};
 export type Props = {
-  slug: string;
   title: string;
-  summary: string;
-  galleries: GalleryContent[];
+  slug: string;
+  description: string;
+  photos: ImageProps[];
   footerSource: MdxRemote.Source;
   footerSourceAddress: MdxRemote.Source;
   source: MdxRemote.Source;
 };
 
 const components = { InstagramEmbed, YouTube, TwitterTweetEmbed };
-const slugToPageContent = (pageContents => {
+const slugToGalleryContent = (galleryContents => {
   let hash = {}
-  pageContents.forEach(it => hash[it.slug] = it)
+  galleryContents.forEach(it => hash[it.slug] = it)
   return hash;
-})(fetchPageContent());
+})(fetchGalleryContent());
 
-export default function Page({
-  slug,
+
+const DynamicComponentWithNoSSR = dynamic(
+  () => import('react-responsive-gallery'),
+  { ssr: false }
+)
+
+export default function GalleryPage({
   title,
-  summary,
-  galleries,
+  slug,
+  description,
+  photos,
   footerSource,
   footerSourceAddress,
   source,
@@ -47,42 +58,30 @@ export default function Page({
   const content = hydrate(source, { components })
   const footerContent = hydrate(footerSource, { components })
   const footerContentAddress = hydrate(footerSourceAddress, { components })
-console.log("hello");
-  // generate prints
-  let prints = [];
-  const printMin = 1, printMax = 8,
-    stepMin = 17, stepMax = 22;
-
-  for(let i = 0; i < 40; i++) {
-    let name = "/images/handprint_" + ((Math.floor(Math.random() * (printMax - printMin)) + printMin) + "").padStart(2, "0") + ".JPEG",
-      step = Math.random() * (stepMin - stepMin) + stepMin,
-      style ={
-        top: (step + stepMin * (i - 1)) + "em",
-        transform: "rotate(" + (Math.random() * 6.28) + "rad)",
-      };
-    prints.push(<img src={name} style={style}></img>);
-  }
-
+  const numPerRow = {xs: 1,s: 2,m: 3,l: 3,xl: 3, xxl:3};
   return (
     <PageLayout
       slug={slug}
-      title={title}
-      summary={summary}
-      galleries={galleries}
+      summary={description}
       footer={footerContent}
       footerAddress={footerContentAddress}
     >
-      <div id="print-bg">
-        <div className="overlay"></div>
-        {prints}
-      </div>
-        {content}
+      <h1>{title}</h1>
+      {content}
+      <DynamicComponentWithNoSSR images={photos} useLightBox={true} numOfImagesPerRow={numPerRow}/>
+      <style jsx>
+        {`
+            h1 {
+              margin-bottom: 3rem;
+            }
+          `}
+      </style>
     </PageLayout>
   )
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = fetchPageContent().map(it => "/" + it.slug);
+  const paths = fetchGalleryContent().map(it => "/galleries/" + it.slug);
   return {
     paths,
     fallback: false,
@@ -90,46 +89,14 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const slug = params.page as string;
+  const slug = params.gallery as string;
 
-  console.log("hello");
   // render page
-  const source = fs.readFileSync(slugToPageContent[slug].fullPath, "utf8");
+  const source = fs.readFileSync(slugToGalleryContent[slug].fullPath, "utf8");
   const { content, data } = matter(source, {
     engines: { yaml: (s) => yaml.load(s, { schema: yaml.JSON_SCHEMA }) as object }
   });
   const mdxSource = await renderToString(content, { components, scope: data });
-
-  // load galleries
-  data.galleries = data.galleries ? data.galleries.map(it => {
-        const fullPath = path.join(galleriesDirectory, it + ".mdx");
-        const fileContents = fs.readFileSync(fullPath, "utf8");
-
-        // Use gray-matter to parse the page metadata section
-        const matterResult = matter(fileContents, {
-          engines: {
-            yaml: (s) => yaml.load(s, { schema: yaml.JSON_SCHEMA }) as object,
-          },
-        });
-        // console.log(matterResult.data);
-        const matterData = matterResult.data as {
-          slug: string;
-          title: string;
-          thumbnail: string;
-          summary: string;
-          fullPath: string,
-        };
-        matterData.fullPath = fullPath;
-
-        // Validate slug string
-        if (matterData.slug !== it) {
-          throw new Error(
-            "slug field not match with the path of its content source"
-          );
-        }
-
-        return matterData;
-  }) : [];
 
   // render footer
   const footerPathSpots = path.join(process.cwd(), "footer/spots.yml");
@@ -145,12 +112,15 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   // console.log(footerYaml);
   // console.log(mdxFooterSource);
 
+  const photoset = data.photos.map(it => { return { src: it.photo }});
+
+// console.log(photoset);
   return {
     props: {
-      slug: data.slug,
       title: data.title,
-      summary: data.summary,
-      galleries: data.galleries,
+      slug: data.slug,
+      description: data.description,
+      photos: photoset,
       footerSource: mdxFooterSource,
       footerSourceAddress: mdxFooterAddressSource,
       source: mdxSource
