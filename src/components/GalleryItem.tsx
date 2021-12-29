@@ -47,7 +47,7 @@ export default function GalleryItem({ gallery }: Props) {
 
             @media (min-width: 769px) {
               a {
-                width: 33%;
+                width: calc(33% - 2rem);
                 box-sizing: border-box;
               }
             }

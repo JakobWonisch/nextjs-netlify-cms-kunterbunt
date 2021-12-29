@@ -11,6 +11,12 @@ export default function Navigation() {
       <Burger active={active} onClick={() => setActive(!active)} />
       <div className={"container " + (active ? "active" : "")}>
         <ul>
+          <li id="nav-bg-01">
+            <img src="/images/handprint_04.jpeg"/>
+          </li>
+          <li id="nav-bg-02">
+            <img src="/images/handprint_07.jpeg"/>
+          </li>
           <li>
             <Link href="/">
               <a className={router.pathname === "/" ? "active" : null}>Home</a>
@@ -51,7 +57,38 @@ export default function Navigation() {
           {`
             .container {
               width: 0;
+              position: relative;
             }
+            #nav-bg-01,
+            #nav-bg-02 {
+              opacity: 0;
+              pointer-events: none;
+            }
+            .active #nav-bg-01,
+            .active #nav-bg-02 {
+              opacity: 0.3;
+            }
+
+            #nav-bg-01 {
+              position: absolute;
+              bottom: -16vw;
+              left: -20vw;
+            }
+            #nav-bg-01 img {
+              max-width: 100vw;
+              transform: rotate(131deg);
+            }
+
+            #nav-bg-02 {
+              position: absolute;
+              top: -50vw;
+              right: -30vw;
+            }
+            #nav-bg-02 img {
+              max-width: 100vw;
+              transform: rotate(-6deg);
+            }
+
             ul {
               opacity: 0;
               width: 100%;
