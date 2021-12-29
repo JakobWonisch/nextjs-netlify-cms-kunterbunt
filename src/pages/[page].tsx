@@ -15,16 +15,18 @@ import { TwitterTweetEmbed } from "react-twitter-embed";
 
 import path from "path";
 import { GalleryContent } from "../lib/galleries";
+import { EmployeeContent } from "../lib/employees";
 
 import { useRouter } from "next/router";
 
 const galleriesDirectory = path.join(process.cwd(), "content/galleries");
+const employeeDirectory = path.join(process.cwd(), "content/employees");
 
 export type Props = {
   slug: string;
   title: string;
   summary: string;
-
+  employees: EmployeeContent[];
   galleries: GalleryContent[];
   footerSource: MdxRemote.Source;
   footerSourceAddress: MdxRemote.Source;
@@ -42,6 +44,7 @@ export default function Page({
   slug,
   title,
   summary,
+  employees,
   galleries,
   footerSource,
   footerSourceAddress,
@@ -68,15 +71,15 @@ export default function Page({
   }
 
   // if on about, generate employees
-  let employees = [];
-  if(router.asPath.startsWith("/ueber")) {
-    employees = <h1>Employees!!</h1>;
+  if(!router.asPath.startsWith("/ueber")) {
+    employees = [];
   }
   return (
     <PageLayout
       slug={slug}
       title={title}
       summary={summary}
+      employees={employees}
       galleries={galleries}
       footer={footerContent}
       footerAddress={footerContentAddress}
@@ -86,7 +89,6 @@ export default function Page({
         {prints}
       </div>
         {content}
-        {employees}
     </PageLayout>
   )
 }
@@ -140,6 +142,41 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
         return matterData;
   }) : [];
 
+  // load employees from meta
+  const employeePath = "meta/employee-order.yml";
+  const employeeContents = fs.readFileSync(employeePath, "utf8");
+  const employeeOrder = yaml.load(employeeContents, { schema: yaml.JSON_SCHEMA }) as object;
+
+  // load employee content
+  data.employees = employeeOrder.employees ? employeeOrder.employees.map(it => {
+        const fullPath = path.join(employeeDirectory, it.employee + ".mdx");
+        const fileContents = fs.readFileSync(fullPath, "utf8");
+
+        // Use gray-matter to parse the page metadata section
+        const matterResult = matter(fileContents, {
+          engines: {
+            yaml: (s) => yaml.load(s, { schema: yaml.JSON_SCHEMA }) as object,
+          },
+        });
+        // console.log(matterResult.data);
+        const matterData = matterResult.data as {
+          slug: string;
+          name: string;
+          portrait: string;
+          fullPath: string,
+        };
+        matterData.fullPath = fullPath;
+
+        // Validate slug string
+        if (matterData.slug !== it.employee) {
+          throw new Error(
+            "slug field not match with the path of its content source"
+          );
+        }
+
+        return matterData;
+  }) : [];
+
 
   // render footer
   const footerPathSpots = path.join(process.cwd(), "footer/spots.yml");
@@ -160,6 +197,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       slug: data.slug,
       title: data.title,
       summary: data.summary,
+      employees: data.employees,
       galleries: data.galleries,
       footerSource: mdxFooterSource,
       footerSourceAddress: mdxFooterAddressSource,

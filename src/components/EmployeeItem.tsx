@@ -1,25 +1,35 @@
-import { GalleryContent } from "../lib/galleries";
+import { EmployeeContent } from "../lib/employees";
 import Date from "./Date";
 import Link from "next/link";
 import { parseISO } from "date-fns";
 
 type Props = {
-  gallery: GalleryContent;
+  employee: EmployeeContent;
 };
-export default function GalleryItem({ gallery }: Props) {
+export default function EmployeeItem({ employee }: Props) {
+  let style = {
+    backgroundPositionX: (Math.random() * 100) + "px",
+    backgroundPositionY: (Math.random() * 100) + "px"
+  };
   return (
-    <Link href={"/galleries/" + gallery.slug}>
-      <a>
-        <img src={gallery.thumbnail} className="gallery-item-thumbnail"/>
-        <h2>{gallery.title}</h2>
+    <Link href={"/employees/" + employee.slug}>
+      <a style={style}>
+        <img src={employee.portrait} className="employee-portrait"/>
+        <h2>{employee.name}</h2>
         <style jsx>
           {`
             a {
               color: black;
-              display: block;
+              display: flex;
               position: relative;
-              min-height: 7rem;
+              height: 7rem;
               margin: 1rem;
+              width: 100%;
+              border-radius: 1rem;
+              overflow: hidden;
+              background-image: url("/images/watercolor.jpg");
+              // background-color: yellow;
+              // background-blend-mode: multiply;
             }
 
             a:hover {
@@ -29,25 +39,22 @@ export default function GalleryItem({ gallery }: Props) {
             h2 {
               margin: 0;
               font-weight: 500;
-              position: absolute;
-              background: rgba(255,255,255,0.8);
               border-radius: 1rem;
               padding: 0.3rem 1rem;
-              left: 50%;
-              top: 50%;
-              transform: translate(-50%, -50%);
+              margin: auto 0;
+              text-align: center;
+              flex: 1;
             }
 
-            .gallery-item-thumbnail {
-              position: absolute;
-              width: 100%;
+            .employee-portrait {
+              width: 50%;
               height: 100%;
               object-fit: cover;
             }
 
             @media (min-width: 769px) {
               a {
-                width: calc(33% - 2rem);
+                width: calc(50% - 2rem);
                 box-sizing: border-box;
               }
             }

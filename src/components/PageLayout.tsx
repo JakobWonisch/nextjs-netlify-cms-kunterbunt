@@ -13,11 +13,14 @@ import { getAuthor } from "../lib/authors";
 import { getTag } from "../lib/tags";
 import GalleryItem from "./GalleryItem";
 import { GalleryContent } from "../lib/galleries";
+import EmployeeItem from "./EmployeeItem";
+import { EmployeeContent } from "../lib/employees";
 
 type Props = {
   slug: string;
   title?: string;
   summary: string;
+  employees?: EmployeeContent[];
   galleries?: GalleryContent[];
   footer: React.ReactNode;
   footerAddress: React.ReactNode;
@@ -27,6 +30,7 @@ export default function PageLayout({
   slug,
   title,
   summary,
+  employees,
   galleries,
   footer,
   footerAddress,
@@ -50,6 +54,12 @@ export default function PageLayout({
         (<div className={"gallery-list"}>
           {galleries.map((it, i) => (
             <GalleryItem gallery={it} />
+          ))}
+        </div>) : "" }
+        { (employees && employees.length != 0) ?
+        (<div className={"employee-list"}>
+          {employees.map((it, i) => (
+            <EmployeeItem employee={it} />
           ))}
         </div>) : "" }
         <footer>
@@ -96,7 +106,8 @@ export default function PageLayout({
               text-align: center;
             }
 
-            .gallery-list {
+            .gallery-list,
+            .employee-list {
               display: flex;
               flex-direction: column;
               margin-top: 3rem;
@@ -108,7 +119,8 @@ export default function PageLayout({
                 flex-direction: column;
               }
 
-              .gallery-list {
+              .gallery-list,
+              .employee-list {
                 display: flex;
                 flex-direction: row;
                 flex-wrap: wrap;
