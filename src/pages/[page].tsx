@@ -145,7 +145,11 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   // load employees from meta
   const employeePath = "meta/employee-order.yml";
   const employeeContents = fs.readFileSync(employeePath, "utf8");
-  const employeeOrder = yaml.load(employeeContents, { schema: yaml.JSON_SCHEMA }) as object;
+  const employeeOrder = yaml.load(employeeContents, { schema: yaml.JSON_SCHEMA }) as {
+    employees: {
+      employee: string
+    }[]
+  };
 
   // load employee content
   data.employees = employeeOrder.employees ? employeeOrder.employees.map(it => {
