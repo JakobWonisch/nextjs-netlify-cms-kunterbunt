@@ -6,6 +6,8 @@ import { useState } from "react";
 export default function Navigation() {
   const router = useRouter();
   const [active, setActive] = useState(false);
+  console.log("pathname: ");
+  console.log(router.pathname);
   return (
     <>
       <Burger active={active} onClick={() => setActive(!active)} />
