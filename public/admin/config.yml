@@ -208,6 +208,30 @@ collections:
             name: "photo"
             widget: "image"
 
+  - name: "employees"
+    label: "Employees"
+    label_singular: "Employee"
+    folder: "content/employees/"
+    extension: "mdx"
+    format: "frontmatter"
+    create: true
+    slug: "{{slug}}"
+    identifier_field: slug
+    summary: "{{name}}"
+    fields:
+      - label: "Slug"
+        name: "slug"
+        widget: "string"
+      - label: "Name"
+        name: "name"
+        widget: "string"
+      - label: "Portrait"
+        name: "portrait"
+        widget: "image"
+      - label: "Body"
+        name: "body"
+        widget: "markdown"
+
   - name: "footer"
     label: "Footer"
     delete: false
