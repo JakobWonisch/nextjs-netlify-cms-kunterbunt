@@ -47,7 +47,7 @@ export default function Page({
   const content = hydrate(source, { components })
   const footerContent = hydrate(footerSource, { components })
   const footerContentAddress = hydrate(footerSourceAddress, { components })
-console.log("hello");
+  
   // generate prints
   let prints = [];
   const printMin = 1, printMax = 8,
@@ -92,7 +92,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const slug = params.page as string;
 
-  console.log("hello");
   // render page
   const source = fs.readFileSync(slugToPageContent[slug].fullPath, "utf8");
   const { content, data } = matter(source, {
@@ -130,6 +129,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
         return matterData;
   }) : [];
+
 
   // render footer
   const footerPathSpots = path.join(process.cwd(), "footer/spots.yml");
