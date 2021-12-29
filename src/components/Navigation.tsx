@@ -6,7 +6,7 @@ import { useState } from "react";
 export default function Navigation() {
   const router = useRouter();
   const [active, setActive] = useState(false);
-  
+
   return (
     <>
       <Burger active={active} onClick={() => setActive(!active)} />
@@ -125,6 +125,34 @@ export default function Navigation() {
               color: #222;
             }
 
+            a {
+              display: inline-block;
+              position: relative;
+            }
+            a::before {
+              opacity: 0;
+              transition: opacity 0.1s;
+            }
+            a:hover::before,
+            a.active::before {
+              content: "";
+              width: 100%;
+              height: 100%;
+              position: absolute;
+              left: -0.5rem;
+              top: -0.5rem;
+              z-index: -1;
+              background-image: url("/images/watercolor.jpg");
+              background-color: lightblue;
+              background-blend-mode: multiply;
+              padding: 0.5rem;
+              border-radius: 0.5rem;
+              opacity: 1;
+            }
+            a:hover::before {
+              opacity: 0.5;
+            }
+
             @media (min-width: 769px) {
               .container {
                 width: 7rem;
@@ -143,6 +171,10 @@ export default function Navigation() {
               li {
                 font-size: 1rem;
                 padding: 0;
+              }
+              #nav-bg-01,
+              #nav-bg-02 {
+                opacity: 0 !important;
               }
             }
           `}
