@@ -65,6 +65,7 @@ a:hover {
   left: 50%;
   transform: translateX(-50%);
   font-size: 1rem;
+  pointer-events: none;
 }
 
 #print-bg img {

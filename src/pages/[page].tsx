@@ -16,12 +16,15 @@ import { TwitterTweetEmbed } from "react-twitter-embed";
 import path from "path";
 import { GalleryContent } from "../lib/galleries";
 
+import { useRouter } from "next/router";
+
 const galleriesDirectory = path.join(process.cwd(), "content/galleries");
 
 export type Props = {
   slug: string;
   title: string;
   summary: string;
+
   galleries: GalleryContent[];
   footerSource: MdxRemote.Source;
   footerSourceAddress: MdxRemote.Source;
@@ -44,10 +47,11 @@ export default function Page({
   footerSourceAddress,
   source,
 }: Props) {
+  const router = useRouter();
   const content = hydrate(source, { components })
   const footerContent = hydrate(footerSource, { components })
   const footerContentAddress = hydrate(footerSourceAddress, { components })
-  
+
   // generate prints
   let prints = [];
   const printMin = 1, printMax = 8,
@@ -63,6 +67,11 @@ export default function Page({
     prints.push(<img src={name} style={style}></img>);
   }
 
+  // if on about, generate employees
+  let employees = [];
+  if(router.asPath.startsWith("/ueber")) {
+    employees = <h1>Employees!!</h1>;
+  }
   return (
     <PageLayout
       slug={slug}
@@ -77,6 +86,7 @@ export default function Page({
         {prints}
       </div>
         {content}
+        {employees}
     </PageLayout>
   )
 }
