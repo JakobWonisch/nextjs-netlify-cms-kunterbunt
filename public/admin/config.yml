@@ -37,14 +37,6 @@ collections:
               label: Keyword
               name: keyword
               widget: "string"
-          - label: "Twitter account"
-            name: "twitter_account"
-            widget: "string"
-            required: false
-          - label: "GitHub account"
-            name: "github_account"
-            widget: "string"
-            required: false
 
   - name: "meta"
     label: "Meta"
