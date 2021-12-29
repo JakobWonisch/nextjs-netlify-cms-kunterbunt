@@ -79,10 +79,10 @@ a:hover {
   width: 14rem;
   left: 0;
   opacity: 0;
-  animation-name: fadein;
+  /* animation-name: fadein;
   animation-delay: 1s;
   animation-duration: 0.2s;
-  animation-fill-mode: forwards;
+  animation-fill-mode: forwards; */
 }
 
 #print-bg img:nth-child(even) {
