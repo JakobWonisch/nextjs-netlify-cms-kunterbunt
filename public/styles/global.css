@@ -50,8 +50,9 @@ a:hover {
   width: 75%;
   max-width: 14rem;
   height: auto;
-  margin: auto;
   display: block;
+  float: none;
+  margin: auto;
 }
 
 #print-bg {
