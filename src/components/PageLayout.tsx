@@ -1,16 +1,11 @@
 import React from "react";
 import styles from "../../public/styles/content.module.css";
-import Author from "./Author";
 import Copyright from "./Copyright";
-import Date from "./Date";
 import Layout from "./Layout";
 import BasicMeta from "./meta/BasicMeta";
 import JsonLdMeta from "./meta/JsonLdMeta";
 import OpenGraphMeta from "./meta/OpenGraphMeta";
 import TwitterCardMeta from "./meta/TwitterCardMeta";
-import TagButton from "./TagButton";
-import { getAuthor } from "../lib/authors";
-import { getTag } from "../lib/tags";
 import GalleryItem from "./GalleryItem";
 import { GalleryContent } from "../lib/galleries";
 import EmployeeItem from "./EmployeeItem";

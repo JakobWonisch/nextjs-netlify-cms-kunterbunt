@@ -2,8 +2,6 @@ import PageLayout from "../components/PageLayout";
 import BasicMeta from "../components/meta/BasicMeta";
 import OpenGraphMeta from "../components/meta/OpenGraphMeta";
 import TwitterCardMeta from "../components/meta/TwitterCardMeta";
-import { SocialList } from "../components/SocialList";
-
 import { GetStaticProps } from "next";
 import renderToString from "next-mdx-remote/render-to-string";
 import { MdxRemote } from "next-mdx-remote/types";
@@ -11,11 +9,6 @@ import hydrate from "next-mdx-remote/hydrate";
 import matter from "gray-matter";
 import fs from "fs";
 import yaml from "js-yaml";
-
-import InstagramEmbed from "react-instagram-embed";
-import YouTube from "react-youtube";
-import { TwitterTweetEmbed } from "react-twitter-embed";
-
 import path from "path";
 
 export type Props = {
