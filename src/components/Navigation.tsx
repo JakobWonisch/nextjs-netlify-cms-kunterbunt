@@ -12,43 +12,43 @@ export default function Navigation() {
       <Burger active={active} onClick={() => setActive(!active)} />
       <div className={"container " + (active ? "active" : "")}>
         <ul>
-          <li id="nav-bg-01">
+          <li id="nav-bg-01" key="bg-01">
             <img src="/images/handprint_04.jpeg"/>
           </li>
-          <li id="nav-bg-02">
+          <li id="nav-bg-02" key="bg-02">
             <img src="/images/handprint_07.jpeg"/>
           </li>
-          <li>
+          <li key="home">
             <Link href="/">
               <a className={router.asPath === "/" ? "active" : null}>Home</a>
             </Link>
           </li>
-          <li>
+          <li key="konzept">
             <Link href="/konzept">
               <a className={router.asPath.startsWith("/konzept") ? "active" : null}>Pädagogisches Konzept</a>
             </Link>
           </li>
-          <li>
+          <li key="grundsatz">
             <Link href="/grundsatz">
               <a className={router.asPath.startsWith("/grundsatz") ? "active" : null}>Montessori-Grundsätze</a>
             </Link>
           </li>
-          <li>
+          <li key="montessori">
             <Link href="/montessori">
               <a className={router.asPath.startsWith("/montessori") ? "active" : null}>Maria Montessori</a>
             </Link>
           </li>
-          <li>
+          <li key="ueber">
             <Link href="/ueber">
               <a className={router.asPath.startsWith("/ueber") ? "active" : null}>Über uns</a>
             </Link>
           </li>
-          <li>
+          <li key="infos">
             <Link href="/infos">
               <a className={router.asPath.startsWith("/infos") ? "active" : null}>Infos für Eltern</a>
             </Link>
           </li>
-          <li>
+          <li key="fotos">
             <Link href="/fotos">
               <a className={router.asPath.startsWith("/fotos") ? "active" : null}>Fotos</a>
             </Link>
@@ -64,6 +64,7 @@ export default function Navigation() {
             #nav-bg-02 {
               opacity: 0;
               pointer-events: none;
+              z-index: -1;
             }
             .active #nav-bg-01,
             .active #nav-bg-02 {

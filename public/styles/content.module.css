@@ -132,7 +132,10 @@
 }
 
 .content img {
-  width: 100%;
+  max-width: 50%;
+  width: 20rem;
+  float: left;
+  margin: 1rem 1rem 1rem 0;
 }
 
 @media (min-width: 769px) {

@@ -30,12 +30,15 @@ export default function GalleryItem({ gallery }: Props) {
               margin: 0;
               font-weight: 500;
               position: absolute;
-              background: rgba(255,255,255,0.8);
-              border-radius: 1rem;
+              border-radius: 0 1rem 1rem 0;
               padding: 0.3rem 1rem;
-              left: 50%;
+              left: 0;
               top: 50%;
-              transform: translate(-50%, -50%);
+              transform: translate(0, -50%);
+              background-image: url("/images/watercolor.jpg");
+              // background-color: rgba(255, 255, 255, 1);
+              background-blend-mode: multiply;
+              margin-right: 1rem;
             }
 
             .gallery-item-thumbnail {
@@ -47,7 +50,7 @@ export default function GalleryItem({ gallery }: Props) {
 
             @media (min-width: 769px) {
               a {
-                width: calc(33% - 2rem);
+                width: calc(50% - 2rem);
                 box-sizing: border-box;
               }
             }
