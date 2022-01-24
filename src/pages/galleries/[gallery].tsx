@@ -51,6 +51,7 @@ export default function GalleryPage({
   slug,
   description,
   photos,
+  footerDate,
   footerSource,
   footerSourceAddress,
   source,
@@ -63,6 +64,7 @@ export default function GalleryPage({
     <PageLayout
       slug={slug}
       summary={description}
+      footerDate={footerDate}
       footer={footerContent}
       footerAddress={footerContentAddress}
     >
@@ -121,6 +123,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       slug: data.slug,
       description: data.description,
       photos: photoset,
+      footerDate: footerYaml["date"],
       footerSource: mdxFooterSource,
       footerSourceAddress: mdxFooterAddressSource,
       source: mdxSource

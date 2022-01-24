@@ -17,6 +17,7 @@ type Props = {
   summary: string;
   employees?: EmployeeContent[];
   galleries?: GalleryContent[];
+  footerDate: string;
   footer: React.ReactNode;
   footerAddress: React.ReactNode;
   children: React.ReactNode;
@@ -27,6 +28,7 @@ export default function PageLayout({
   summary,
   employees,
   galleries,
+  footerDate,
   footer,
   footerAddress,
   children,
@@ -58,7 +60,10 @@ export default function PageLayout({
           ))}
         </div>) : "" }
         <footer>
-          <div className={styles.spots}>{footer}</div>
+          <div className={styles.spots}>
+            {footer}
+            <span className={"date"}>Stand: {footerDate}</span>
+          </div>
           <div className={styles.address}>{footerAddress}</div>
           <Copyright />
         </footer>
@@ -106,6 +111,10 @@ export default function PageLayout({
               display: flex;
               flex-direction: column;
               margin-top: 3rem;
+            }
+
+            .date {
+              font-style: italic;
             }
 
             @media (min-width: 769px) {

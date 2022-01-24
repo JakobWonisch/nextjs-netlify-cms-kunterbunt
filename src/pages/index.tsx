@@ -19,6 +19,7 @@ export type Props = {
 };
 
 export default function Index({
+  footerDate,
   footerSource,
   footerSourceAddress,
   source
@@ -54,6 +55,7 @@ export default function Index({
     <PageLayout
       slug=""
       summary=""
+      footerDate={footerDate}
       footer={footerContent}
       footerAddress={footerContentAddress}>
       <BasicMeta url={"/"} />
@@ -132,6 +134,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   return {
     props: {
+      footerDate: footerYaml["date"],
       footerSource: mdxFooterSource,
       footerSourceAddress: mdxFooterAddressSource,
       source: mdxSource

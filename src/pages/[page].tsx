@@ -47,6 +47,7 @@ export default function Page({
   summary,
   employees,
   galleries,
+  footerDate,
   footerSource,
   footerSourceAddress,
   source,
@@ -105,6 +106,7 @@ export default function Page({
       summary={summary}
       employees={employees}
       galleries={galleries}
+      footerDate={footerDate}
       footer={footerContent}
       footerAddress={footerContentAddress}
     >
@@ -227,6 +229,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       summary: data.summary,
       employees: data.employees,
       galleries: data.galleries,
+      footerDate: footerYaml["date"],
       footerSource: mdxFooterSource,
       footerSourceAddress: mdxFooterAddressSource,
       source: mdxSource

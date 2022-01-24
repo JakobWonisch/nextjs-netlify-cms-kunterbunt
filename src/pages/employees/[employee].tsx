@@ -31,6 +31,7 @@ export default function EmployeePage({
   slug,
   name,
   portrait,
+  footerDate,
   footerSource,
   footerSourceAddress,
   source,
@@ -43,6 +44,7 @@ export default function EmployeePage({
     <PageLayout
       slug={slug}
       summary={name}
+      footerDate={footerDate}
       footer={footerContent}
       footerAddress={footerContentAddress}
     >
@@ -101,6 +103,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       name: data.name,
       slug: data.slug,
       portrait: data.portrait,
+      footerDate: footerYaml["date"],
       footerSource: mdxFooterSource,
       footerSourceAddress: mdxFooterAddressSource,
       source: mdxSource
