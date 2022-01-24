@@ -30,7 +30,7 @@ export default function Index({
 
   // generate prints
   let prints = [];
-  const printMin = 1, printMax = 8,
+  const printMin = 2, printMax = 8,
     stepMin = 17, stepMax = 22;
 
   if(!printsSaved) {
