@@ -13,6 +13,7 @@ import path from "path";
 import { useState } from "react";
 
 export type Props = {
+  footerDate: string;
   footerSource: MdxRemote.Source;
   footerSourceAddress: MdxRemote.Source;
   source: MdxRemote.Source;

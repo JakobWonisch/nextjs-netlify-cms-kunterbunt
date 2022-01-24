@@ -28,6 +28,7 @@ export type Props = {
   slug: string;
   description: string;
   photos: ImageProps[];
+  footerDate: string;
   footerSource: MdxRemote.Source;
   footerSourceAddress: MdxRemote.Source;
   source: MdxRemote.Source;

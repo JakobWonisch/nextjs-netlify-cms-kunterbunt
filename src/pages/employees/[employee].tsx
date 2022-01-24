@@ -15,6 +15,7 @@ export type Props = {
   slug: string;
   name: string;
   portrait: string;
+  footerDate: string;
   footerSource: MdxRemote.Source;
   footerSourceAddress: MdxRemote.Source;
   source: MdxRemote.Source;

@@ -29,6 +29,7 @@ export type Props = {
   summary: string;
   employees: EmployeeContent[];
   galleries: GalleryContent[];
+  footerDate: string;
   footerSource: MdxRemote.Source;
   footerSourceAddress: MdxRemote.Source;
   source: MdxRemote.Source;
