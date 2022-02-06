@@ -97,12 +97,20 @@ export default function Index({
           letter-spacing: 0.05em;
         }
 
+        #logo {
+          margin-bottom: 4rem;
+        }
+
         @media (min-width: 769px) {
           h1 {
             font-size: 3rem;
           }
           h2 {
             font-size: 2.25rem;
+          }
+
+          #logo {
+            margin-bottom: 6rem;
           }
         }
       `}</style>
