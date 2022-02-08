@@ -61,6 +61,12 @@ export default function GalleryPage({
   const footerContent = hydrate(footerSource, { components })
   const footerContentAddress = hydrate(footerSourceAddress, { components })
   const numPerRow = {xs: 1,s: 2,m: 3,l: 3,xl: 3, xxl:3};
+  const galleryStyle = {
+    "width": "100%",
+    "float": "none",
+    "margin": "0",
+    "max-width": "auto"
+  };
   return (
     <PageLayout
       slug={slug}
@@ -71,11 +77,21 @@ export default function GalleryPage({
     >
       <h1>{title}</h1>
       {content}
-      <DynamicComponentWithNoSSR images={photos} useLightBox={true} numOfImagesPerRow={numPerRow}/>
+      <DynamicComponentWithNoSSR images={photos} useLightBox={true} numOfImagesPerRow={numPerRow} imagesStyle={"gallery-image"}/>
       <style jsx>
         {`
             h1 {
               margin-bottom: 3rem;
+            }
+          `}
+      </style>
+      <style global jsx>
+        {`
+            .gallery-image {
+              width: 100% !important;
+              float: none !important;
+              margin: 0 !important;
+              max-width: 100% !important;
             }
           `}
       </style>

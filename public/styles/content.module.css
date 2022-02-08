@@ -131,7 +131,7 @@
   /* font-family: "Gaegu", cursive; */
 }
 
-.content article > img {
+.content img {
   max-width: 50%;
   width: 20rem;
   float: left;

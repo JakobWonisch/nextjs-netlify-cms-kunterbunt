@@ -116,6 +116,8 @@ export default function Page({
         {prints}
       </div>
         {content}
+      <style global jsx>{`
+        `}</style>
     </PageLayout>
   )
 }
