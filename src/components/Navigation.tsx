@@ -1,11 +1,17 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import Burger from "./Burger";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Navigation() {
   const router = useRouter();
   const [active, setActive] = useState(false);
+
+  useEffect(() => {
+    router.events.on("routeChangeComplete", (url, { shallow }) => {
+      setActive(false);
+    });
+  }, [router]);
 
   return (
     <>
