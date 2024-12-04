@@ -41,7 +41,12 @@ export default function Navigation() {
           </li>
           <li key="montessori">
             <Link href="/montessori">
-              <a className={router.asPath.startsWith("/montessori") ? "active" : null}>Maria Montessori</a>
+              <a className={router.asPath.startsWith("/montessori") ? "active" : null}>Motorpädagogik</a>
+            </Link>
+          </li>
+          <li key="pikler">
+            <Link href="/pikler">
+              <a className={router.asPath.startsWith("/pikler") ? "active" : null}>Piklerpädagogik</a>
             </Link>
           </li>
           <li key="ueber">
