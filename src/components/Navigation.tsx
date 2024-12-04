@@ -39,14 +39,14 @@ export default function Navigation() {
               <a className={router.asPath.startsWith("/grundsatz") ? "active" : null}>Montessori-Grundsätze</a>
             </Link>
           </li>
-          <li key="montessori">
-            <Link href="/montessori">
-              <a className={router.asPath.startsWith("/montessori") ? "active" : null}>Motorpädagogik</a>
+          <li key="motorpaedagogik">
+            <Link href="/motorpaedagogik">
+              <a className={router.asPath.startsWith("/motorpaedagogik") ? "active" : null}>Motorpädagogik</a>
             </Link>
           </li>
-          <li key="pikler">
-            <Link href="/pikler">
-              <a className={router.asPath.startsWith("/pikler") ? "active" : null}>Piklerpädagogik</a>
+          <li key="piklerpaedagogik">
+            <Link href="/piklerpaedagogik">
+              <a className={router.asPath.startsWith("/piklerpaedagogik") ? "active" : null}>Piklerpädagogik</a>
             </Link>
           </li>
           <li key="ueber">
