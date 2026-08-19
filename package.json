@@ -4,10 +4,16 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "NODE_OPTIONS=--openssl-legacy-provider next build",
     "start": "next start",
-    "export": "next build && next export -o ./dist",
+    "export": "npm run build && next export -o ./dist",
     "test": "jest"
+  },
+  "engines": {
+    "node": "24.x"
+  },
+  "resolutions": {
+    "next/postcss": "8.5.26"
   },
   "dependencies": {
     "@mapbox/rehype-prism": "^0.6.0",
