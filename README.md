@@ -1,3 +1,7 @@
+# Kindergruppe Kunterbunt
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/04723d52-4e26-4a24-81c6-a963ec9f00d1/deploy-status)](https://app.netlify.com/projects/pensive-borg-bce8d6/deploys)
+
 ![Next.js blogging template for Netlify](https://repository-images.githubusercontent.com/284910441/d8efc300-e2ae-11ea-9596-b01e3844e39d)
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/c6f44d34-0570-4ca0-9d3d-cabdaa2b3afb/deploy-status)](https://app.netlify.com/sites/nextjs-netlify-blog-template/deploys)
