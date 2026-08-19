@@ -9,6 +9,9 @@
     "export": "next build && next export -o ./dist",
     "test": "jest"
   },
+  "engines": {
+    "node": "24.x"
+  },
   "dependencies": {
     "@mapbox/rehype-prism": "^0.6.0",
     "@svgr/webpack": "^5.5.0",
